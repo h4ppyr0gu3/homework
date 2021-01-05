@@ -8,7 +8,6 @@ int integral_2 ();
 int integral_3 ();
 int rangefun(int *min_range, int *max_range );
 
-
 int main(){
 	
 	int integration_choice;
