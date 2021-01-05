@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 
+
 int integral_1 ();
 int integral_2 ();
 int integral_3 ();
@@ -24,7 +25,7 @@ int main(){
 		scanf("%d", &integration_choice);
 	}
 
-	switch(integration_choice) {
+	switch(integration_choice) {                                                     // choose which case to run
 		case 1:
 			integral_1 ();
 		break;
@@ -37,49 +38,52 @@ int main(){
 	}
 }
 
+
 int integral_1 (){
 	
-	int k, l, m, preans, q , a, n , min_range, max_range, range, integral; 
+	int k, l, m, preans, q , a, n , min_range, max_range, range, integral;            // declare variables
 	int *ans;
 	
-	printf("please enter a value of a: ");
+	printf("please enter a value of a: ");                                            // ask users for values of a and n
 	scanf("%d", &a);
 	printf("please enter a value of n: ");
 	scanf("%d", &n);
 
-	rangefun(&min_range, &max_range);
+	rangefun(&min_range, &max_range);                                                 // rangefun returns user input in pointer
 
 	range = max_range - min_range;
 
-	int (*j)[range] = malloc(sizeof(int[range][n]));
+	int (*j)[range] = malloc(sizeof(int[range][n]));                                  // malloc for 1d and 2d arrays
 	ans = malloc((range + 1) * sizeof(int));
 
-	for((min_range); min_range <= (max_range); min_range++) {
-		for(int i = 0; i <= n; i++) 
-			j[k][i-1] = a * pow(min_range, i);
-		k = k + 1;
+	for((min_range); min_range <= (max_range); min_range++) {                         // loop determines value of y
+		for(int i = 0; i <= n; i++)                                                     // for individual pieces of the equation
+			j[k][i-1] = a * pow(min_range, i);                                            // ie. 3x = y 3x^2 = y2 etc
+		k++;
 	}
 
-	for (int i = 0; i <= range; ++i) 
-		for (int x = 0; x <= n; ++x) {
-			l = j[i][x - 1];
+	for (int i = 0; i <= range; ++i)                                                   // sums up all the y values to the nth variable
+		for (int x = 0; x <= n; ++x) {                                                   // stores them in a new array with x as index
+			l = j[i][x - 1];                                                               // and y as the value of index
 			ans[i] = ans[i] + l;			
 		}
-	
 
-	l = 0;
+	l = 0;                                                                              // reset variable l
 
-	for(int i = 1; i < range; i++) 
+	for(int i = 1; i < range; i++)                                                      // add up values from n=1 to n=n-1
 		l = ans[i] + l;
+
+	integral = 0.5 * ((ans[range] + ans[0]) + (2 * l));                                 // find area using .5*((n0 + n) + 2(sum of other n values))
+                                                                                      // .5*((n0 + n) + 2(sum of other n values))
+	printf("integral = %d\n", integral );                                               // print value   
 	
-
-	integral = 0.5 * ((ans[range] + ans[0]) + (2 * l));
-
-	printf("integral = %d\n", integral );
+	free(ans);
+	free(j);
 }
 
-int integral_2 () {
 
+int integral_2 () {                                                                    // process repeats for different functions
+                                                                                       // the only difference being 1d arrays only
 	double *ans;
 	int l, c, k, integral, min_range, max_range, range, j;
 
@@ -103,7 +107,10 @@ int integral_2 () {
 	integral = 0.5 * ((ans[range] + ans[0]) + (2 * l));
 
 	printf("integral = %d\n", integral );
+
+	free(ans);
 }
+
 
 int integral_3 () {
 
@@ -143,4 +150,3 @@ int rangefun(int *min_range, int *max_range) {
 	printf("to: ");
 	scanf("%d", max_range);
 }
-
