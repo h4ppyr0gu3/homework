@@ -1,3 +1,13 @@
+/* David Rogers
+Write a program that estimates the value of a definite integral of a function f(x) over a given interval
+[a, b]
+The program should support three functions such as:
+1. A polynominal function f(x) = ∑ ni=0 a i x i
+2. f(x) = e kx
+3. f(x) = ln⁡(x)
+
+X-1983*/
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
